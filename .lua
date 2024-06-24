@@ -24,7 +24,6 @@ local NotifyLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/vKh
 
 --[[
      SCRIPT MADE BY elias.3872 UI LIB MADE BY V3rm @ King Singularity
-idgaf if the source is open its just so that its proof its not a rat
 --]]
 
 local ui_options = {
@@ -2045,7 +2044,6 @@ function library:AddWindow(title, options)
 	return window_data, Window
 end
 
-
 do -- Example UI
 	local Window = library:AddWindow("HEHE.LUA", {
 		main_color = Color3.fromRGB(41, 74, 122),
@@ -3225,50 +3223,6 @@ TP:AddButton("Fix View Player", function()
 	NotifyLib.prompt('Return Local Player.', 'This Will Return You Back To Where You Were', 2)
 end)
 
-local players = game:GetService("Players")
-local localPlayer = players.LocalPlayer
-local RunService = game:GetService("RunService")
-
-local levitationActive = false -- Flag to control levitation
-
-local function startLevitating()
-    levitationActive = true
-    local character = localPlayer.Character or localPlayer.CharacterAdded:Wait()
-    local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
-
-    -- Create a BodyPosition instance to control the position of the HumanoidRootPart
-    local bodyPosition = Instance.new("BodyPosition")
-    bodyPosition.MaxForce = Vector3.new(0, math.huge, 0) -- Allow upward movement
-    bodyPosition.Position = humanoidRootPart.Position + Vector3.new(0, 5, 0) -- Position above the current position
-    bodyPosition.Parent = humanoidRootPart
-
-    -- Update the position continuously to keep levitating
-    local heartbeatConnection
-    heartbeatConnection = RunService.Heartbeat:Connect(function()
-        if not levitationActive then
-            bodyPosition:Destroy()
-            heartbeatConnection:Disconnect()
-        elseif character and character:FindFirstChild("HumanoidRootPart") then
-            bodyPosition.Position = humanoidRootPart.Position + Vector3.new(0, 5, 0)
-        end
-    end)
-end
-
-local function stopLevitating()
-    levitationActive = false
-end
-
-
-
-local Switch = TP:AddSwitch("Levitate", function(Value)
-    if Value then
-        startLevitating()
-    else
-        stopLevitating()
-    end
-end)
-
-Switch:Set(false) -- Set the initial state to false
 
 TP:AddButton("Start Rainbow", function()
 	NotifyLib.prompt('Make Local Player Rainbow', 'This Will Make Your Character Rainbow.', 2)
